@@ -1,0 +1,90 @@
+{
+  "format": "opf",
+  "version": "1.0",
+  "product": "opf:eidos-apps:product",
+  "entities": [
+    {
+      "id": "opf:eidos-apps:product",
+      "type": "product",
+      "title": "Eidos Apps",
+      "status": "operating",
+      "description": "SDK for programs too big for an applet viewer. Prim-native. Human gates. First app: Eidos Video.",
+      "provenance": {"by": "agent:grok", "method": "Daniel 2026-08-22: create the Apps SDK; it is Eidos App not Prim App"}
+    },
+    {
+      "id": "opf:eidos-apps:area:intent",
+      "type": "area",
+      "title": "Intent",
+      "status": "active",
+      "provenance": {"by": "agent:grok", "method": "OPF v1 intent area"}
+    },
+    {
+      "id": "opf:eidos-apps:area:governance",
+      "type": "area",
+      "title": "Decisions",
+      "status": "active",
+      "provenance": {"by": "agent:grok", "method": "Split from Applets is a decision"}
+    },
+    {
+      "id": "opf:eidos-apps:intent",
+      "type": "intent",
+      "title": "Declare Eidos Apps without growing Applets or renaming Prim.app",
+      "status": "active",
+      "description": "Types, app.json, gates. Real surfaces. Agent drafts; human yes.",
+      "content": "content/north-star.md",
+      "provenance": {"by": "human:daniel", "method": "Chat 2026-08-22: category-defining App, not applet"}
+    },
+    {
+      "id": "opf:eidos-apps:authority:daniel",
+      "type": "authority",
+      "title": "Daniel",
+      "status": "active",
+      "provenance": {"by": "agent:grok", "method": "Product owner"}
+    },
+    {
+      "id": "opf:eidos-apps:decision:not-applet",
+      "type": "decision",
+      "title": "Eidos Apps, not Applets, not Prim App",
+      "status": "active",
+      "description": "Applets stay tiny. Prim.app stays the host. This SDK creates Apps.",
+      "rationale": {
+        "why": "A director that plays a film and waits on a human yes will not fit Look. Growing an applet until it is an app kills both. Prim.app already owns that name.",
+        "problems": [],
+        "alternatives": [
+          {
+            "option": "Grow eidos-applets until Eidos Video fits",
+            "disposition": "ruled-out",
+            "reason": "Applets charter: do not grow Applets until they are Apps."
+          },
+          {
+            "option": "Call it prim-apps / Prim App",
+            "disposition": "ruled-out",
+            "reason": "Prim.app is the double-click host."
+          }
+        ],
+        "revisit_when": ["An App ships a runtime of its own.", "A second App is declared besides Eidos Video."]
+      },
+      "provenance": {"by": "human:daniel", "method": "Corrected prim-apps to Eidos App"}
+    }
+  ],
+  "relationships": [
+    {"id": "opf:eidos-apps:rel:root-intent", "type": "contains", "from": "opf:eidos-apps:product", "to": "opf:eidos-apps:area:intent", "order": 0},
+    {"id": "opf:eidos-apps:rel:root-gov", "type": "contains", "from": "opf:eidos-apps:product", "to": "opf:eidos-apps:area:governance", "order": 1},
+    {"id": "opf:eidos-apps:rel:c-intent", "type": "contains", "from": "opf:eidos-apps:area:intent", "to": "opf:eidos-apps:intent", "order": 0},
+    {"id": "opf:eidos-apps:rel:c-authority", "type": "contains", "from": "opf:eidos-apps:area:governance", "to": "opf:eidos-apps:authority:daniel", "order": 0},
+    {"id": "opf:eidos-apps:rel:c-decision", "type": "contains", "from": "opf:eidos-apps:area:governance", "to": "opf:eidos-apps:decision:not-applet", "order": 1},
+    {"id": "opf:eidos-apps:rel:expresses", "type": "expresses", "from": "opf:eidos-apps:product", "to": "opf:eidos-apps:intent"},
+    {"id": "opf:eidos-apps:rel:decides", "type": "decides", "from": "opf:eidos-apps:decision:not-applet", "to": "opf:eidos-apps:intent"},
+    {"id": "opf:eidos-apps:rel:gov-intent", "type": "governed-by", "from": "opf:eidos-apps:intent", "to": "opf:eidos-apps:authority:daniel"},
+    {"id": "opf:eidos-apps:rel:gov-decision", "type": "governed-by", "from": "opf:eidos-apps:decision:not-applet", "to": "opf:eidos-apps:authority:daniel"}
+  ],
+  "events": [
+    {"id": "opf:eidos-apps:event:product-created", "type": "created", "at": "2026-08-22T22:40:00Z", "subjects": ["opf:eidos-apps:product"], "detail": "Created product"},
+    {"id": "opf:eidos-apps:event:area-intent-created", "type": "created", "at": "2026-08-22T22:40:01Z", "subjects": ["opf:eidos-apps:area:intent"], "detail": "Created intent area"},
+    {"id": "opf:eidos-apps:event:area-gov-created", "type": "created", "at": "2026-08-22T22:40:02Z", "subjects": ["opf:eidos-apps:area:governance"], "detail": "Created governance area"},
+    {"id": "opf:eidos-apps:event:intent-created", "type": "created", "at": "2026-08-22T22:40:03Z", "subjects": ["opf:eidos-apps:intent"], "detail": "Created intent"},
+    {"id": "opf:eidos-apps:event:authority-created", "type": "created", "at": "2026-08-22T22:40:04Z", "subjects": ["opf:eidos-apps:authority:daniel"], "detail": "Created authority"},
+    {"id": "opf:eidos-apps:event:decision-created", "type": "created", "at": "2026-08-22T22:40:05Z", "subjects": ["opf:eidos-apps:decision:not-applet"], "detail": "Created not-applet decision"},
+    {"id": "opf:eidos-apps:event:decision-accepted", "type": "accepted", "at": "2026-08-22T22:40:06Z", "subjects": ["opf:eidos-apps:decision:not-applet"], "actor": "human:daniel", "detail": "Daniel: it is Eidos App, not prim-apps"}
+  ]
+}

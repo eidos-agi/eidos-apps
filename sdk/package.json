@@ -1,0 +1,12 @@
+{
+  "name": "@eidos-agi/apps",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Opinionated SDK for Eidos Apps. API library first; gates; MCP and CLI optional.",
+  "type": "module",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,30 @@
+{
+  "kind": "eidos-app",
+  "id": "eidos-video",
+  "name": "Eidos Video",
+  "summary": "Scene video you recapture. The shot is a file. An AI clip is unique paint you lose.",
+  "prims": [
+    { "profile": "prim.scene", "path": "https://github.com/eidos-agi/prim.scene" },
+    { "profile": "prim.video", "path": "https://github.com/eidos-agi/prim.video" }
+  ],
+  "tools": [
+    {
+      "kind": "connector",
+      "name": "video-3d-forge",
+      "cites": { "profile": "prim.scene", "path": "https://github.com/eidos-agi/video-3d-forge" }
+    }
+  ],
+  "surfaces": [
+    { "id": "reel", "title": "Reel", "url": "https://video.eidosagi.com/" },
+    { "id": "share", "title": "Share", "url": "https://video.eidosagi.com/mobile/" },
+    { "id": "keep", "title": "Storyboard", "url": "https://video.eidosagi.com/keep/" }
+  ],
+  "gates": [
+    {
+      "id": "animatic",
+      "title": "Watch the boards on the song. Typed yes before any 3D capture.",
+      "pass": "human-yes"
+    }
+  ],
+  "store": { "kind": "files", "path": "packs/" }
+}
