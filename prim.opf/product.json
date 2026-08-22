@@ -8,7 +8,7 @@
       "type": "product",
       "title": "Eidos Apps",
       "status": "operating",
-      "description": "SDK for programs too big for an applet viewer. Prim-native. Human gates. First app: Eidos Video.",
+      "description": "SDK for programs too big for an applet viewer. Docker images. Prim-native. Human gates. First app: Eidos Video.",
       "provenance": {"by": "agent:grok", "method": "Daniel 2026-08-22: create the Apps SDK; it is Eidos App not Prim App"}
     },
     {
@@ -46,7 +46,7 @@
       "type": "decision",
       "title": "Eidos Apps, not Applets, not Prim App",
       "status": "active",
-      "description": "Applets stay tiny. Prim.app stays the host. This SDK creates Apps.",
+      "description": "Applets stay tiny workers. Apps are Docker images. Prim.app stays the host. This SDK creates Apps.",
       "rationale": {
         "why": "A director that plays a film and waits on a human yes will not fit Look. Growing an applet until it is an app kills both. Prim.app already owns that name.",
         "problems": [],
@@ -62,7 +62,7 @@
             "reason": "Prim.app is the double-click host."
           }
         ],
-        "revisit_when": ["An App ships a runtime of its own.", "A second App is declared besides Eidos Video."]
+        "revisit_when": ["An App image actually runs.", "A second App is declared besides Eidos Video."]
       },
       "provenance": {"by": "human:daniel", "method": "Corrected prim-apps to Eidos App"}
     }
@@ -85,6 +85,7 @@
     {"id": "opf:eidos-apps:event:intent-created", "type": "created", "at": "2026-08-22T22:40:03Z", "subjects": ["opf:eidos-apps:intent"], "detail": "Created intent"},
     {"id": "opf:eidos-apps:event:authority-created", "type": "created", "at": "2026-08-22T22:40:04Z", "subjects": ["opf:eidos-apps:authority:daniel"], "detail": "Created authority"},
     {"id": "opf:eidos-apps:event:decision-created", "type": "created", "at": "2026-08-22T22:40:05Z", "subjects": ["opf:eidos-apps:decision:not-applet"], "detail": "Created not-applet decision"},
-    {"id": "opf:eidos-apps:event:decision-accepted", "type": "accepted", "at": "2026-08-22T22:40:06Z", "subjects": ["opf:eidos-apps:decision:not-applet"], "actor": "human:daniel", "detail": "Daniel: it is Eidos App, not prim-apps"}
+    {"id": "opf:eidos-apps:event:decision-accepted", "type": "accepted", "at": "2026-08-22T22:40:06Z", "subjects": ["opf:eidos-apps:decision:not-applet"], "actor": "human:daniel", "detail": "Daniel: it is Eidos App, not prim-apps"},
+    {"id": "opf:eidos-apps:event:runtime-docker", "type": "updated", "at": "2026-08-22T23:10:00Z", "subjects": ["opf:eidos-apps:product", "opf:eidos-apps:decision:not-applet"], "actor": "human:daniel", "detail": "Apps are Docker images. Applets stay workers."}
   ]
 }

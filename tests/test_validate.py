@@ -32,6 +32,15 @@ class ValidateApp(unittest.TestCase):
             errs = validate.validate(p)
             self.assertTrue(any("gates" in e for e in errs))
 
+    def test_rejects_missing_docker(self):
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d)
+            body = json.loads((ROOT / "sdk" / "examples" / "eidos-video" / "app.json").read_text())
+            body["runtime"] = {"kind": "worker"}
+            (p / "app.json").write_text(json.dumps(body))
+            errs = validate.validate(p)
+            self.assertTrue(any("docker" in e for e in errs))
+
     def test_rejects_json_render_surface(self):
         with tempfile.TemporaryDirectory() as d:
             p = Path(d)

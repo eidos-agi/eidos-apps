@@ -8,7 +8,7 @@ Opinionated SDK for creating Eidos Apps. This repo is the home. Do not start a s
 2. **Real surfaces.** Not json-render. If it fits a Look card, it is an applet.
 3. **Gates.** Human yes. Silence is not a pass.
 4. **API library always.** MCP and CLI optional, same methods.
-5. **Not an applet worker. Not Prim.app.**
+5. **Docker image.** Not an applet worker. Not Prim.app.
 
 ## Control
 

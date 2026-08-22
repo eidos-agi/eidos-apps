@@ -38,6 +38,12 @@ export type StoreOpinion = {
   path: string;
 };
 
+/** Apps run as containers. Applets are local workers. Do not swap them. */
+export type DockerRuntime = {
+  kind: "docker";
+  image: string;
+};
+
 export type AppApi = {
   call(method: string, args?: unknown): Promise<unknown>;
 };
@@ -57,6 +63,7 @@ export type EidosApp = {
   surfaces: Surface[];
   gates: Gate[];
   store: StoreOpinion;
+  runtime: DockerRuntime;
   api: AppApi;
   adapters?: AppAdapters;
 };

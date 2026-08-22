@@ -8,7 +8,7 @@ This repo is the **opinionated SDK** that creates them. Nothing else.
 
 | Noun | Role |
 |------|------|
-| **Eidos App** | A program too big for Look. Real surfaces. Prims stay the files. Tools cite them. |
+| **Eidos App** | A program too big for Look. Real surfaces. Prims stay the files. Tools cite them. **Runs as a Docker image.** |
 | **eidos-apps SDK** | How you declare one. Opinions as types and an `app.json`. |
 | **Gate** | A human yes. Silence is not a pass. Agentic work stops here. |
 
@@ -24,6 +24,8 @@ That composition is **per app**. Each app owns its prims, surfaces, connectors, 
 
 Stay **web** when the surface is a page. A Mac icon may open the existing browser. Do not invent a private WebKit to look native.
 
+**Runtime is a Docker image.** One image per app. Capture, ffmpeg, Chrome, models — they live in that image, not in an applet isolate. Applets stay local workers with no listen-port. Apps are containers. Do not run an App as an applet worker. Do not run an applet as a container to look bigger.
+
 json-render is an **applet** fallback. Apps are allowed a real surface. If a surface can be a card in Look, it is an applet citing the same prims — not this app wearing a smaller coat.
 
 ## Agentic work
@@ -38,7 +40,7 @@ Every app is controllable through an **API library**. MCP and CLI are optional a
 
 ## What this is not
 
-- **Eidos Applets** — tiny programs, json-render fallback, applet workers, ~6 MB viewers. Different repo.
+- **Eidos Applets** — tiny programs, json-render fallback, applet workers, ~6 MB viewers. Not Docker. Different repo.
 - **Prim.app** — the double-click host for a `.prim`. Peer, not this SDK.
 - A pipeline editor, a DAW, Cinema Forge revived as a website.
 - A vibe-coded monolith with prims taped on.
@@ -50,7 +52,8 @@ This repo may only grow work that is:
 1. prim-app composition (prims + Prim Tools + connectors)
 2. `app.json` and the SDK types
 3. gates (human yes)
-4. the API library, with optional MCP and CLI adapters
-5. examples that are real apps (Eidos Video is the first)
+4. Docker as the app runtime (declare the image; do not invent an orchestrator)
+5. the API library, with optional MCP and CLI adapters
+6. examples that are real apps (Eidos Video is the first)
 
 If a feature is not on that list, it belongs somewhere else or it does not belong.

@@ -2,7 +2,7 @@
 
 Opinionated SDK for **Eidos Apps** — programs that will not fit in an applet viewer.
 
-The file is still a Prim. The app is the pairing of prims, tools that cite them, full surfaces, and **human gates**.
+The file is still a Prim. The app is the pairing of prims, tools that cite them, full surfaces, **human gates**, and a **Docker image**.
 
 Applets stay tiny. This is the elsewhere the Applets charter reserved.
 
@@ -12,7 +12,7 @@ Applets stay tiny. This is the elsewhere the Applets charter reserved.
 2. **Real surfaces.** json-render is for applets. An app is allowed a page that plays a film.
 3. **Gates.** Agentic work stops for a human yes. Silence is not approval.
 4. **API library always.** MCP and CLI are optional adapters on that library.
-5. **Not a worker.** Apps are not applet isolates. Not Prim.app.
+5. **Docker image.** One container per app. Applets are local workers. Not Prim.app.
 
 ## Use it
 
@@ -34,4 +34,4 @@ App.cli                        // option — same methods
 
 ## Status
 
-v0 is types, `app.json`, and a validator. No runtime. The first app still lives in its own repos; this SDK is how you declare it.
+v0 is types, `app.json`, and a validator. Runtime kind is Docker; this repo does not orchestrate. The first app still lives in its own repos; this SDK is how you declare it.

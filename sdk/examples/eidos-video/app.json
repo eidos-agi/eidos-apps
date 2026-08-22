@@ -26,5 +26,6 @@
       "pass": "human-yes"
     }
   ],
-  "store": { "kind": "files", "path": "packs/" }
+  "store": { "kind": "files", "path": "packs/" },
+  "runtime": { "kind": "docker", "image": "eidos-agi/eidos-video" }
 }

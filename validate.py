@@ -17,7 +17,7 @@ def validate(pack: Path) -> list[str]:
     except json.JSONDecodeError as e:
         return [f"app.json: {e}"]
 
-    for k in ("kind", "id", "name", "summary", "prims", "tools", "surfaces", "gates", "store"):
+    for k in ("kind", "id", "name", "summary", "prims", "tools", "surfaces", "gates", "store", "runtime"):
         if k not in app:
             err.append(f"app.json missing {k}")
     if app.get("kind") != "eidos-app":
@@ -53,6 +53,14 @@ def validate(pack: Path) -> list[str]:
     store = app.get("store") or {}
     if store.get("kind") not in {"sqlite-vec", "files"}:
         err.append("store.kind must be sqlite-vec or files")
+
+    runtime = app.get("runtime") or {}
+    if runtime.get("kind") != "docker":
+        err.append("runtime.kind must be docker — Apps are containers, Applets are workers")
+    if not runtime.get("image"):
+        err.append("runtime.image missing")
+    if runtime.get("kind") in {"worker", "applet-worker"}:
+        err.append("an App is not an applet worker")
     return err
 
 
