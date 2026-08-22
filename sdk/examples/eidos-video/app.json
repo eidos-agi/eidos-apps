@@ -11,7 +11,7 @@
     {
       "kind": "connector",
       "name": "video-3d-forge",
-      "cites": { "profile": "prim.scene", "path": "https://github.com/eidos-agi/video-3d-forge" }
+      "cites": { "profile": "prim.scene", "path": "https://github.com/eidos-agi/prim.scene" }
     }
   ],
   "surfaces": [
@@ -23,9 +23,13 @@
     {
       "id": "animatic",
       "title": "Watch the boards on the song. Typed yes before any 3D capture.",
-      "pass": "human-yes"
+      "requires": "human-yes"
     }
   ],
   "store": { "kind": "files", "path": "packs/" },
-  "runtime": { "kind": "docker", "image": "eidos-agi/eidos-video" }
+  "runtime": {
+    "kind": "docker",
+    "image": "eidos-agi/eidos-video",
+    "dockerfile": "Dockerfile"
+  }
 }

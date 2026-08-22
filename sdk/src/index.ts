@@ -1,10 +1,10 @@
 /**
- * eidos-apps SDK — opinions as types.
- * Do not grow this into Applets. Do not name it Prim App.
+ * Eidos Apps contract — opinions as types.
+ * The App is a Docker image. Do not grow this into Applets. Do not name it Prim App.
  */
 
-/** Prim Tools are operators on a Prim. Do not mint prim.surface / prim.connector packs. */
-export type PrimToolKind = "surface" | "connector";
+/** Connectors operate on a Prim. Surfaces are URLs on the app, not tools. */
+export type PrimToolKind = "connector";
 
 export type PrimCite = {
   profile: string;
@@ -25,12 +25,13 @@ export type Surface = {
 };
 
 /**
- * A human yes. The agent stops. Silence is not a pass.
+ * Policy: a human yes is required.
+ * This is not a record that anyone said yes.
  */
 export type Gate = {
   id: string;
   title: string;
-  pass: "human-yes";
+  requires: "human-yes";
 };
 
 export type StoreOpinion = {
@@ -38,10 +39,25 @@ export type StoreOpinion = {
   path: string;
 };
 
-/** Apps run as containers. Applets are local workers. Do not swap them. */
+/** The App is this image. dockerfile is the recipe in the pack. */
 export type DockerRuntime = {
   kind: "docker";
   image: string;
+  dockerfile: string;
+};
+
+/** Serializable pack. Matches app.json. No executable fields. */
+export type AppManifest = {
+  kind: "eidos-app";
+  id: string;
+  name: string;
+  summary: string;
+  prims: PrimCite[];
+  tools: ToolCite[];
+  surfaces: Surface[];
+  gates: Gate[];
+  store: StoreOpinion;
+  runtime: DockerRuntime;
 };
 
 export type AppApi = {
@@ -53,32 +69,13 @@ export type AppAdapters = {
   cli?: boolean;
 };
 
-export type EidosApp = {
-  kind: "eidos-app";
-  id: string;
-  name: string;
-  summary: string;
-  prims: PrimCite[];
-  tools: ToolCite[];
-  surfaces: Surface[];
-  gates: Gate[];
-  store: StoreOpinion;
-  runtime: DockerRuntime;
+/** Runtime object once an image exists. Not in app.json. */
+export type EidosApp = AppManifest & {
   api: AppApi;
   adapters?: AppAdapters;
 };
 
-export type CliAdapter = {
-  enabled: true;
-  expose(api: AppApi): void;
-};
-
-export type McpAdapter = {
-  enabled: true;
-  expose(api: AppApi): void;
-};
-
-export function requireGates(app: EidosApp): Gate[] {
+export function requireGates(app: AppManifest): Gate[] {
   if (!app.gates.length) {
     throw new Error("an Eidos App needs at least one human gate");
   }

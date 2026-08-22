@@ -2,7 +2,7 @@
   "name": "@eidos-agi/apps",
   "version": "0.1.0",
   "private": true,
-  "description": "Opinionated SDK for Eidos Apps. API library first; gates; MCP and CLI optional.",
+  "description": "Contract for Eidos Apps as Docker images.",
   "type": "module",
   "main": "./src/index.ts",
   "exports": {

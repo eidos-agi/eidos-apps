@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
-"""Fail-closed checks for an Eidos App pack (app.json)."""
+"""Fail-closed checks for an Eidos App pack (app.json + Dockerfile)."""
 from __future__ import annotations
 
 import json
 import sys
 from pathlib import Path
+
+FORBIDDEN_PASSES = ("timeout", "green-test", "model-liked-it", "the model liked it")
 
 
 def validate(pack: Path) -> list[str]:
@@ -24,6 +26,8 @@ def validate(pack: Path) -> list[str]:
         err.append("kind must be eidos-app")
     if app.get("kind") in {"applet", "prim-applet", "prim-app"}:
         err.append("this is Eidos Apps, not an applet and not Prim.app")
+    if "api" in app:
+        err.append("api does not belong in app.json — that is runtime, after the image exists")
 
     prims = app.get("prims") or []
     if not prims:
@@ -47,8 +51,16 @@ def validate(pack: Path) -> list[str]:
     for i, g in enumerate(gates):
         if not isinstance(g, dict) or not g.get("id") or not g.get("title"):
             err.append(f"gates[{i}] needs id and title")
-        elif g.get("pass") != "human-yes":
-            err.append(f"gates[{i}] pass must be human-yes")
+            continue
+        if "pass" in g:
+            err.append(f"gates[{i}] uses pass — that is a record elsewhere; declare requires")
+        req = g.get("requires")
+        if req != "human-yes":
+            err.append(f"gates[{i}] requires must be human-yes")
+        blob = json.dumps(g).lower()
+        for bad in FORBIDDEN_PASSES:
+            if bad in blob:
+                err.append(f"gates[{i}] {bad!r} is not a pass")
 
     store = app.get("store") or {}
     if store.get("kind") not in {"sqlite-vec", "files"}:
@@ -56,11 +68,19 @@ def validate(pack: Path) -> list[str]:
 
     runtime = app.get("runtime") or {}
     if runtime.get("kind") != "docker":
-        err.append("runtime.kind must be docker — Apps are containers, Applets are workers")
+        err.append("runtime.kind must be docker — the App is a Docker image")
     if not runtime.get("image"):
-        err.append("runtime.image missing")
+        err.append("runtime.image missing — name the image")
     if runtime.get("kind") in {"worker", "applet-worker"}:
         err.append("an App is not an applet worker")
+    df_name = runtime.get("dockerfile") or "Dockerfile"
+    df = pack / str(df_name)
+    if not df.is_file():
+        err.append("Dockerfile missing — an App is an image")
+    else:
+        text = df.read_text()
+        if "EXPOSE" not in text:
+            err.append("Dockerfile must EXPOSE a port — Apps listen, Applets do not")
     return err
 
 
