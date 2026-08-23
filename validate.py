@@ -80,7 +80,7 @@ def validate(pack: Path) -> list[str]:
     else:
         text = df.read_text()
         if "EXPOSE" not in text:
-            err.append("Dockerfile must EXPOSE a port — Apps listen, Applets do not")
+            err.append("Dockerfile must declare EXPOSE (pack syntax; does not prove a process listens)")
     return err
 
 
@@ -95,7 +95,8 @@ def main(argv: list[str]) -> int:
         for e in errs:
             print(" ", e)
         return 1
-    print("ok", pack)
+    print("declaration-ok", pack)
+    print("  schema only; not running, not approved")
     return 0
 
 

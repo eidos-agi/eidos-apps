@@ -3,8 +3,11 @@
  * The App is a Docker image. Do not grow this into Applets. Do not name it Prim App.
  */
 
-/** Connectors operate on a Prim. Surfaces are URLs on the app, not tools. */
-export type PrimToolKind = "connector";
+/**
+ * A connector cites a Prim. Not Prim’s `surface | connector` union.
+ * App pages are Surface URLs, not Prim Tools.
+ */
+export type ConnectorKind = "connector";
 
 export type PrimCite = {
   profile: string;
@@ -12,7 +15,7 @@ export type PrimCite = {
 };
 
 export type ToolCite = {
-  kind: PrimToolKind;
+  kind: ConnectorKind;
   name: string;
   cites: PrimCite;
 };
@@ -20,7 +23,7 @@ export type ToolCite = {
 export type Surface = {
   id: string;
   title: string;
-  /** A real page. Not a json-render card. */
+  /** App page. Not a Prim Tool. Not a json-render card. */
   url: string;
 };
 

@@ -22,14 +22,14 @@ Copy [`sdk/examples/eidos-video/`](sdk/examples/eidos-video/). Pack = `app.json`
 python3 validate.py sdk/examples/eidos-video
 ```
 
-A green validator means the pack is a legal image declaration. It does not mean the image was built, and it does not mean a human said yes.
+`declaration-ok` means the pack is a legal image declaration. It does not mean the image was built, listens, or that a human said yes.
 
-## First app
+## Declaration fixture
 
-**Eidos Video** — scene video you recapture. Packs: `prim.scene`, `prim.video`. Capture is `video-3d-forge` (a forge, not a prim). Watch surfaces: `video.eidosagi.com`, `/mobile`, `/keep`. Gate: animatic yes before 3D capture.
+[`sdk/examples/eidos-video/`](sdk/examples/eidos-video/) is a fixture, not Eidos Video. Packs it names: `prim.scene`, `prim.video`. Capture stays in `video-3d-forge`. Watch URLs (`video.eidosagi.com`, `/mobile`, `/keep`) are live Caddy pages this image does not serve. Gate: animatic yes before 3D capture — policy, not a passed yes.
 
-The image name is `eidos-agi/eidos-video`. The Dockerfile builds; capture is not in it yet. A running `cat` of `app.json` is not Eidos Video.
+The image name is `eidos-agi/eidos-video`. `CMD cat` of `app.json` is not the App.
 
 ## Status
 
-v0 is the contract: types, `app.json`, Dockerfile, validator. This repo does not orchestrate. The first app still lives in its own repos; this is how you declare it as an App.
+v0 is the contract. This repo does not orchestrate. Eidos Video still lives in its own repos. It becomes an App when its image stays up and answers on the declared port.

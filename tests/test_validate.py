@@ -26,6 +26,18 @@ class ValidateApp(unittest.TestCase):
         errs = validate.validate(EXAMPLE)
         self.assertEqual(errs, [])
 
+    def test_cli_says_declaration_ok(self):
+        import io
+        from contextlib import redirect_stdout
+
+        buf = io.StringIO()
+        with redirect_stdout(buf):
+            rc = validate.main(["validate.py", str(EXAMPLE)])
+        self.assertEqual(rc, 0)
+        lines = buf.getvalue().splitlines()
+        self.assertTrue(lines[0].startswith("declaration-ok"))
+        self.assertFalse(any(line == f"ok {EXAMPLE.resolve()}" or line.startswith("ok ") for line in lines))
+
     def test_rejects_applet_kind(self):
         body = json.loads((EXAMPLE / "app.json").read_text())
         body["kind"] = "applet"

@@ -1,4 +1,4 @@
-# Eidos Video — the App is this image.
+# Declaration fixture. Not Eidos Video.
 # Declared, not running. Capture stays in video-3d-forge.
 FROM alpine:3.20
 WORKDIR /app

@@ -27,7 +27,7 @@ Applets are tiny programs a person builds with AI and glances at in a small view
 
 The artifact is **one Docker image**. `app.json` is the label on that image. The Dockerfile in the pack is the recipe. This repo does not orchestrate.
 
-Join **prims**, **Prim Tools** (connectors), and a **control API**. The file stays the Prim. The tool cites it. Surfaces are real pages the image (or a page it serves) is for.
+Join **prims**, **connectors** (Prim Tools that cite a file), and a **control API**. Surfaces are app pages — URLs the image owns, runs, or controls. They are not Prim Tools. Do not reuse Prim’s `surface | connector` union here.
 
 That composition is **per app**. Each app owns its prims, surfaces, connectors, store, and image. A shared website is how you look; it is not a shared stack.
 
@@ -43,7 +43,7 @@ An app may let an agent draft, sketch, assemble, capture. It may not let the age
 
 Gates are first-class. The agent works **between** them. A typed human yes is the only pass. Do not treat a timeout, a green test, or “the model liked it” as approval.
 
-`app.json` declares that a gate *requires* a human yes. It does not record that anyone said yes. A validator `ok` is not approval.
+`app.json` declares that a gate *requires* a human yes. It does not record that anyone said yes. A validator `declaration-ok` is not approval and not “the app listens.”
 
 ## Control
 
@@ -67,6 +67,6 @@ This repo may only grow work that is:
 3. gates (human yes required; records live elsewhere)
 4. Docker as the App (declare the image; do not invent an orchestrator)
 5. the API library, with optional MCP and CLI adapters, when a second app needs shared `call()`
-6. examples that are real apps (Eidos Video is the first)
+6. examples that are real apps — Eidos Video is the intended first; until its image listens, the pack in this repo is a **declaration fixture**, not the App
 
 If a feature is not on that list, it belongs somewhere else or it does not belong.

@@ -12,4 +12,4 @@ Do not start a second contract repo.
 4. **API library** later. MCP and CLI optional, same methods. Not in `app.json`.
 5. **Docker image.** Dockerfile in the pack. Listens. Not an applet worker. Not Prim.app.
 
-Copy [`examples/eidos-video/`](examples/eidos-video/).
+Copy [`examples/eidos-video/`](examples/eidos-video/) as a declaration fixture. It is not the running App.
